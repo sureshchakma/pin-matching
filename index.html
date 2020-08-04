@@ -58,11 +58,11 @@
 
 
     <script>
-        const pinBtn = document.getElementById("pinBtn");
+        var pinBtn = document.getElementById("pinBtn");
         pinBtn.addEventListener("click", function(){
           
           
-          const newPin =  Math.floor(Math.random() * (2000 - 1001)) +  1001;
+          var newPin =  Math.floor(Math.random() * (2000 - 1001)) +  1001;
           document.getElementById("pinInput").value = newPin;
           let fail = document.getElementById("fail");
           fail.style.display = " none";
@@ -95,7 +95,7 @@
     document.getElementById("submitInput").value = "";
 
 
-    const submitBtn =document.getElementById("apply");
+    var submitBtn =document.getElementById("apply");
     submitBtn.addEventListener("click", function(){
             let pinInput =  document.getElementById("pinInput").value;
             let submitInput = document.getElementById("submitInput").value;

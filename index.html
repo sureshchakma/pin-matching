@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container ">
+        <div class="row">
+            <div id="pin-area" class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="pinInput" class="form-control"  type="text" placeholder="____">
+                    <button id="pinBtn" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div id="submit-area"  class="col-md-6">
+                <div class="input-section half-width" >
+                    <input id="submitInput" class="form-control" type="text"   placeholder="____">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row" >
+                              <div class="button" onclick="showValue('7')">7</div>
+                              <div class="button" onclick="showValue('8')">8</div>
+                              <div class="button" onclick="showValue('9')">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="showValue('4')">4</div>
+                              <div class="button" onclick="showValue('5')">5</div>
+                              <div class="button" onclick="showValue('6')">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="showValue('1')">1</div>
+                              <div class="button" onclick="showValue('2')">2</div>
+                              <div class="button" onclick="showValue('3')">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="showValue('<')"><</div>
+                                <div class="button" onclick="showValue('0')">0</div>
+                                <div class="button" onclick="showValue('c')">C</div>
+                            </div>
+                            <div>
+                                <button id="apply" type="submit" class="submit-btn">Submit</button>
+                                <p id="action" class="action-left"><span id="tryLeft">3</span> try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="fail" class="notify"><span class="danger">❌</span> Pin Didn't Match, Please try again</p>
+            <p id="success" class="notify"><span class="green" >✅</span> Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+
+
+    <script>
+        const pinBtn = document.getElementById("pinBtn");
+        pinBtn.addEventListener("click", function(){
+          
+          
+          const newPin =  Math.floor(Math.random() * (2000 - 1001)) +  1001;
+          document.getElementById("pinInput").value = newPin;
+          let fail = document.getElementById("fail");
+          fail.style.display = " none";
+          let success = document.getElementById("success");
+          success.style.display = "none";       
+          
+});
+    document.getElementById("pinInput").value = "";
+            
+    function showValue(data) {
+            let submitInput = document.getElementById("submitInput");
+            switch (data) {
+                        case 'c':
+                                submitInput.value = "";
+                                break;
+                        case '<':
+                                submitInput.value = submitInput.value.substr(0, submitInput.value.length - 1);
+                                break;
+            
+                        default:
+                                submitInput.value += data;
+                        
+                                break;
+            }
+            
+
+
+            
+    }
+document.getElementById("submitInput").value = "";
+
+
+    const submitBtn =document.getElementById("apply");
+    submitBtn.addEventListener("click", function(){
+            let pinInput =  document.getElementById("pinInput").value;
+            let submitInput = document.getElementById("submitInput").value;
+            if (submitInput === pinInput && submitInput.length > 0 && pinInput.length > 0 ) {
+                        let success = document.getElementById("success");
+                        success.style.display = "block";
+                        document.getElementById("submitInput").value = "";
+                        document.getElementById("pinInput").value = "";
+                            
+            }  else if (submitInput !== pinInput) {
+                        let fail = document.getElementById("fail");
+                        fail.style.display = " block";
+                        document.getElementById("submitInput").value = "";
+                        document.getElementById("pinInput").value = "";
+                        
+            }
+            else { let success = document.getElementById("success");
+                        success.style.display = "none";
+                        let fail = document.getElementById("fail");
+                        fail.style.display = "none";
+                        
+                    
+            }
+                    
+            
+            
+    });
+
+
+
+    </script>
+</body>
+</html>
